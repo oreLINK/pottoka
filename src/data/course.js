@@ -16,10 +16,10 @@ export const course = {
           subtitle: 'Compter de 0 à 20',
           color: '#3AA655',
           lessons: [
-            { id: 'ch1-u1-l1', title: 'Chiffres 0 à 4', count: 8, xp: 15, selection: { mode: 'random', filter: { anyTag: ['0-4'] } } },
-            { id: 'ch1-u1-l2', title: 'Chiffres 5 à 9', count: 8, xp: 15, selection: { mode: 'random', filter: { anyTag: ['5-9'] } } },
-            { id: 'ch1-u1-l3', title: 'Révision 0 à 9', count: 10, xp: 20, selection: { mode: 'random', filter: { anyTag: ['0-9'] } } },
-            { id: 'ch1-u1-l4', title: 'Nombres 10 à 20', count: 8, xp: 15, selection: { mode: 'random', filter: { anyTag: ['10-20'] } } }
+            { id: 'ch1-u1-l1', title: 'Chiffres 0 à 4', description: 'Apprends à compter de 0 à 4 en euskara.', count: 8, xp: 15, selection: { mode: 'random', filter: { anyTag: ['0-4'] } } },
+            { id: 'ch1-u1-l2', title: 'Chiffres 5 à 9', description: 'Continue de compter jusqu’à 9.', count: 8, xp: 15, selection: { mode: 'random', filter: { anyTag: ['5-9'] } } },
+            { id: 'ch1-u1-l3', title: 'Révision 0 à 9', description: 'Révise tous les chiffres de 0 à 9.', count: 10, xp: 20, selection: { mode: 'random', filter: { anyTag: ['0-9'] } } },
+            { id: 'ch1-u1-l4', title: 'Nombres 10 à 20', description: 'Découvre les nombres de 10 à 20.', count: 8, xp: 15, selection: { mode: 'random', filter: { anyTag: ['10-20'] } } }
           ]
         }
       ]
@@ -31,7 +31,7 @@ export const course = {
       color: '#1CA0C4',
       locked: true,
       units: [
-        { id: 'ch2-u1', title: 'Salutations', subtitle: 'Kaixo, agur…', color: '#1CA0C4', lessons: [{ id: 'ch2-u1-l1', title: 'Kaixo !', count: 6 }] }
+        { id: 'ch2-u1', title: 'Salutations', subtitle: 'Kaixo, agur…', color: '#1CA0C4', lessons: [{ id: 'ch2-u1-l1', title: 'Kaixo !', description: 'Apprends à saluer en basque.', count: 6 }] }
       ]
     }
   ]
