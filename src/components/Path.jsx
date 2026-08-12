@@ -1,130 +1,111 @@
 import { useEffect, useState } from 'react'
 import Pottoka from './Pottoka'
-import BottomNav from './BottomNav'
-import { lessonStatus } from '../engine/progress'
+import Coastline from './Coastline'
+import { resolvePathItem } from '../data/pathItems'
 
-function IconCheck() {
-  return <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l4 4 10-10" stroke="#fff" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round" /></svg>
-}
 function IconLock() {
   return <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 10V8a6 6 0 0112 0v2" stroke="#9a9a9a" strokeWidth="2" fill="none" /><rect x="4" y="10" width="16" height="10" rx="2" fill="#c9c9c9" /></svg>
 }
 function IconStar() {
-  return <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.7 5.5 6 .9-4.3 4.2 1 6-5.4-2.8L6.6 22l1-6L3.3 9.4l6-.9z" fill="#fff" /></svg>
+  return <svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.7 5.5 6 .9-4.3 4.2 1 6-5.4-2.8L6.6 22l1-6L3.3 9.4l6-.9z" fill="#fff" /></svg>
 }
-function IconBook() {
+function IconBook({ size = 24 }) {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
       <path d="M4 5c3-1.5 6-1.5 8 0v14c-2-1.5-5-1.5-8 0V5Z" fill="#fff" opacity="0.9" />
       <path d="M20 5c-3-1.5-6-1.5-8 0v14c2-1.5 5-1.5 8 0V5Z" fill="#fff" opacity="0.65" />
     </svg>
   )
 }
-function IconFlagEu() {
-  return (
-    <svg width="22" height="16" viewBox="0 0 22 16" aria-hidden="true" role="img" aria-label="Euskara">
-      <rect width="22" height="16" rx="2" fill="#D8232A" />
-      <path d="M0 0L22 16M22 0L0 16" stroke="#3AA655" strokeWidth="3.5" />
-      <path d="M11 0V16M0 8H22" stroke="#fff" strokeWidth="3" />
-    </svg>
-  )
-}
 
-// Le "chemin" d'apprentissage : chapitres -> unités -> leçons en pastilles.
-export default function Path({ course, progress, onStart, onReset }) {
-  const [openLessonId, setOpenLessonId] = useState(null)
+// Le "chemin" d'apprentissage : chapitres -> unités -> parcours en zigzag de
+// pastilles (leçons ou cours, voir src/data/pathItems.js), titre visible
+// sous chaque pastille. `tree` ne décrit que la navigation (voir
+// src/data/tree.json) ; le titre et la description de chaque élément
+// viennent de src/data/lessons/<id>.json ou src/data/courses/<id>.json.
+export default function Path({ tree, onStart }) {
+  const [openId, setOpenId] = useState(null)
 
   // Ferme le popup au clic en dehors du nœud (ou de son popup) ouvert.
   useEffect(() => {
-    if (!openLessonId) return
+    if (!openId) return
     function handleClickOutside(e) {
       const wrap = e.target.closest('.node-wrap')
-      if (!wrap || wrap.dataset.lessonId !== openLessonId) setOpenLessonId(null)
+      if (!wrap || wrap.dataset.itemId !== openId) setOpenId(null)
     }
     document.addEventListener('mousedown', handleClickOutside)
     return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [openLessonId])
+  }, [openId])
 
   return (
     <div className="home">
+      <Coastline />
       <header className="topbar">
         <div className="brand">
-          <Pottoka expression="wave" size={40} />
+          <Pottoka expression="wave" size={20} />
           <span>Pottoka</span>
-        </div>
-        <div className="stats">
-          <div className="stat stat--lang" title="Euskara"><IconFlagEu /></div>
-          <div className="stat stat--fire" title="Série">🔥 {progress.streak}</div>
-          <div className="stat stat--xp" title="XP">✦ {progress.xp}</div>
         </div>
       </header>
 
-      {course.chapters.map((ch) => (
+      {tree.chapters.filter((ch) => ch.isDisplay).map((ch) => (
         <section key={ch.id} className={'chapter' + (ch.locked ? ' chapter--locked' : '')}>
           <div className="chapter-head" style={{ background: ch.color, boxShadow: `0 4px 0 ${shade(ch.color)}` }}>
-            <div className="chapter-score">{ch.score}</div>
             <div className="chapter-title">{ch.title}</div>
+            {ch.titleEu && <div className="chapter-subtitle" lang="eu">{ch.titleEu}</div>}
           </div>
 
-          {(ch.units || []).map((unit) => (
+          {(ch.units || []).filter((unit) => unit.isDisplay).map((unit) => (
             <div key={unit.id} className="unit">
               <div className="unit-banner" style={{ background: tint(unit.color || ch.color) }}>
                 <div className="unit-banner-text">
                   <div className="unit-title">{unit.title}</div>
-                  {unit.subtitle && <div className="unit-sub">{unit.subtitle}</div>}
+                  {unit.titleEu && <div className="unit-sub" lang="eu">{unit.titleEu}</div>}
                 </div>
                 <IconBook />
               </div>
 
               <div className="path">
-                {(unit.lessons || []).map((lesson, idx) => {
-                  const status = ch.locked ? 'locked' : lessonStatus(progress, course, lesson.id)
-                  const crowns = progress.lessons[lesson.id]?.crowns || 0
+                {(unit.lessons || []).map((rawId, idx) => {
+                  const item = resolvePathItem(rawId)
+                  if (!item) return null
+                  const isCourse = item.kind === 'course'
+                  const locked = !!ch.locked
                   const offset = pathOffset(idx)
-                  const nodeStyle =
-                    status === 'available'
-                      ? { background: ch.color, boxShadow: `0 6px 0 ${shade(ch.color)}`, '--pulse-color': ch.color }
-                      : status === 'done'
-                      ? { background: ch.color, boxShadow: `0 3px 0 ${shade(ch.color)}` }
-                      : undefined
-                  const isOpen = openLessonId === lesson.id
+                  const nodeStyle = !locked && !isCourse
+                    ? { background: ch.color, boxShadow: `0 4px 0 ${shade(ch.color)}` }
+                    : undefined
+                  const isOpen = openId === rawId
                   return (
                     <div
-                      key={lesson.id}
-                      className={'node-wrap' + (isOpen ? ' node-wrap--open' : '')}
-                      data-lesson-id={lesson.id}
+                      key={rawId}
+                      className="node-wrap"
+                      data-item-id={rawId}
                       style={{ transform: `translateX(${offset}px)` }}
                     >
                       <button
                         type="button"
-                        className={`node node--${status}`}
+                        className={'node' + (locked ? ' node--locked' : '') + (isCourse ? ' node--course' : '')}
                         style={nodeStyle}
-                        disabled={status === 'locked'}
-                        onClick={() => setOpenLessonId((id) => (id === lesson.id ? null : lesson.id))}
-                        aria-label={`${lesson.title} — ${status}`}
+                        disabled={locked}
+                        onClick={() => setOpenId((id) => (id === rawId ? null : rawId))}
+                        aria-label={locked ? `${item.data.title} — verrouillé` : item.data.title}
                       >
-                        {status === 'done' ? <IconCheck /> : status === 'locked' ? <IconLock /> : <IconStar />}
-                        {status === 'done' && crowns > 0 && <span className="node-crown-badge">👑{crowns}</span>}
+                        {locked ? <IconLock /> : isCourse ? <IconBook size={30} /> : <IconStar />}
                       </button>
 
-                      {status === 'available' && (
-                        <div className={`path-mascot path-mascot--${offset >= 0 ? 'left' : 'right'}`}>
-                          <div className="mascot-bubble" style={{ borderColor: ch.color, color: ch.color }}>Démarrer</div>
-                          <Pottoka expression="cheer" size={60} />
-                        </div>
-                      )}
-
                       {isOpen && (
-                        <div className="lesson-popup">
-                          <div className="lesson-popup-title">{lesson.title}</div>
-                          {lesson.description && <div className="lesson-popup-desc">{lesson.description}</div>}
+                        <div className="node-popup">
+                          <div className="node-popup-title">{item.data.title}</div>
+                          {item.data.description && <div className="node-popup-desc">{item.data.description}</div>}
                           <button
                             type="button"
                             className="btn btn--primary"
-                            style={{ background: ch.color, boxShadow: `0 4px 0 ${shade(ch.color)}` }}
-                            onClick={() => { setOpenLessonId(null); onStart(lesson) }}
+                            style={isCourse
+                              ? { background: 'var(--red)', boxShadow: '0 4px 0 var(--red-d)' }
+                              : { background: ch.color, boxShadow: `0 4px 0 ${shade(ch.color)}` }}
+                            onClick={() => { setOpenId(null); onStart(rawId) }}
                           >
-                            {status === 'done' ? 'Réviser' : 'Commencer'}
+                            Commencer
                           </button>
                         </div>
                       )}
@@ -137,11 +118,7 @@ export default function Path({ course, progress, onStart, onReset }) {
         </section>
       ))}
 
-      <footer className="home-footer">
-        <button className="btn btn--ghost btn--sm" onClick={onReset}>Réinitialiser ma progression</button>
-      </footer>
-
-      <BottomNav />
+      <div className="path-end muted">À venir…</div>
     </div>
   )
 }

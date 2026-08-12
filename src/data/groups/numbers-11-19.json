@@ -1,0 +1,13 @@
+{
+  "items": [
+    { "fr": "onze", "eu": "hamaika", "value": 11 },
+    { "fr": "douze", "eu": "hamabi", "value": 12 },
+    { "fr": "treize", "eu": "hamahiru", "value": 13 },
+    { "fr": "quatorze", "eu": "hamalau", "value": 14 },
+    { "fr": "quinze", "eu": "hamabost", "value": 15 },
+    { "fr": "seize", "eu": "hamasei", "value": 16 },
+    { "fr": "dix-sept", "eu": "hamazazpi", "value": 17 },
+    { "fr": "dix-huit", "eu": "hemezortzi", "value": 18 },
+    { "fr": "dix-neuf", "eu": "hemeretzi", "value": 19 }
+  ]
+}

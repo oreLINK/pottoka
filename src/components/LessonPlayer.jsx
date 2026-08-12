@@ -25,7 +25,7 @@ function IconHeart({ filled }) {
   )
 }
 
-export default function LessonPlayer({ lesson, exercises, onComplete, onQuit }) {
+export default function LessonPlayer({ exercises, onComplete, onQuit }) {
   const total = exercises.length
   const [index, setIndex] = useState(0)
   const [hearts, setHearts] = useState(START_HEARTS)
@@ -44,20 +44,7 @@ export default function LessonPlayer({ lesson, exercises, onComplete, onQuit }) 
     setCorrect(false)
   }, [index])
 
-  // les associations se valident toutes seules une fois complètes
-  useEffect(() => {
-    if (ex?.type === 'match_pairs' && answer === 'done' && !checked) {
-      setChecked(true)
-      setCorrect(true)
-      setCorrectCount((c) => c + 1)
-    }
-  }, [answer, ex, checked])
-
-  const progress = useMemo(() => Math.round((index / total) * 100), [index, total])
-  const ready = canCheck(ex, answer)
-
-  function handleCheck() {
-    const ok = grade(ex, answer)
+  function applyResult(ok) {
     setCorrect(ok)
     setChecked(true)
     if (ok) {
@@ -69,9 +56,27 @@ export default function LessonPlayer({ lesson, exercises, onComplete, onQuit }) 
     }
   }
 
+  // les associations se valident toutes seules une fois complètes ; les QCM
+  // se valident dès qu'une option est choisie (pas de bouton "Vérifier").
+  useEffect(() => {
+    if (checked) return
+    if (ex?.type === 'match_pairs' && answer === 'done') {
+      applyResult(true)
+    } else if (ex?.type === 'mcq_word' && typeof answer === 'number') {
+      applyResult(grade(ex, answer))
+    }
+  }, [answer, ex, checked])
+
+  const progress = useMemo(() => Math.round((index / total) * 100), [index, total])
+  const ready = canCheck(ex, answer)
+
+  function handleCheck() {
+    applyResult(grade(ex, answer))
+  }
+
   function handleContinue() {
     if (index + 1 >= total) {
-      onComplete({ passed: true, xp: lesson.xp || 10, correctCount, total })
+      onComplete({ correctCount, total })
     } else {
       setIndex((i) => i + 1)
     }
@@ -94,10 +99,10 @@ export default function LessonPlayer({ lesson, exercises, onComplete, onQuit }) 
     )
   }
 
-  const isMatch = ex.type === 'match_pairs'
+  const isAutoValidated = ex.type === 'match_pairs' || ex.type === 'mcq_word'
 
   return (
-    <div className="lesson">
+    <div className="lesson lesson--play">
       <div className="lesson-top">
         <button className="iconbtn" aria-label="Quitter la leçon" onClick={onQuit}><IconClose /></button>
         <div className="progress"><i style={{ width: `${progress}%` }} /></div>
@@ -108,7 +113,7 @@ export default function LessonPlayer({ lesson, exercises, onComplete, onQuit }) 
       </div>
 
       <div className="lesson-body">
-        <ExerciseRenderer ex={ex} value={answer} onChange={setAnswer} locked={checked} />
+        <ExerciseRenderer ex={ex} value={answer} onChange={setAnswer} locked={checked} checked={checked} correct={correct} />
       </div>
 
       <div className={'footer' + (checked ? (correct ? ' footer--correct' : ' footer--wrong') : '')}>
@@ -125,8 +130,10 @@ export default function LessonPlayer({ lesson, exercises, onComplete, onQuit }) 
         )}
 
         {!checked ? (
-          isMatch ? (
-            <div className="footer-hint muted">Associe toutes les paires pour continuer.</div>
+          isAutoValidated ? (
+            <div className="footer-hint muted">
+              {ex.type === 'match_pairs' ? 'Associe toutes les paires pour continuer.' : 'Choisis la bonne réponse.'}
+            </div>
           ) : (
             <button className="btn btn--check" disabled={!ready} onClick={handleCheck}>Vérifier</button>
           )

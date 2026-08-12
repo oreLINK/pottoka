@@ -1,27 +1,35 @@
 import { useState } from 'react'
 import Path from './components/Path'
 import LessonPlayer from './components/LessonPlayer'
+import CoursePlayer from './components/CoursePlayer'
 import Results from './components/Results'
-import { course } from './data/course'
-import { bank } from './data/bank'
-import { resolveLesson } from './engine/select'
-import { useProgress } from './hooks/useProgress'
+import tree from './data/tree.json'
+import { resolveLesson } from './engine/calls'
+import { resolvePathItem } from './data/pathItems'
 
 export default function App() {
-  const { progress, finishLesson, reset } = useProgress()
-  const [view, setView] = useState('home') // 'home' | 'lesson' | 'results'
-  const [active, setActive] = useState(null) // { lesson, exercises }
+  const [view, setView] = useState('home') // 'home' | 'lesson' | 'course' | 'results'
+  const [active, setActive] = useState(null) // { exercises }
+  const [activeCourseId, setActiveCourseId] = useState(null)
   const [result, setResult] = useState(null)
 
-  function startLesson(lesson) {
-    const exercises = resolveLesson(lesson, bank)
+  function startItem(id) {
+    const item = resolvePathItem(id)
+    if (!item) return
+
+    if (item.kind === 'course') {
+      setActiveCourseId(id)
+      setView('course')
+      return
+    }
+
+    const exercises = resolveLesson(id)
     if (!exercises.length) return
-    setActive({ lesson, exercises })
+    setActive({ exercises })
     setView('lesson')
   }
 
   function completeLesson(res) {
-    finishLesson(active.lesson.id, res.xp)
     setResult(res)
     setView('results')
   }
@@ -29,16 +37,19 @@ export default function App() {
   return (
     <div className="app">
       {view === 'home' && (
-        <Path course={course} progress={progress} onStart={startLesson} onReset={reset} />
+        <Path tree={tree} onStart={startItem} />
       )}
 
       {view === 'lesson' && active && (
         <LessonPlayer
-          lesson={active.lesson}
           exercises={active.exercises}
           onComplete={completeLesson}
           onQuit={() => setView('home')}
         />
+      )}
+
+      {view === 'course' && activeCourseId && (
+        <CoursePlayer courseId={activeCourseId} onQuit={() => setView('home')} />
       )}
 
       {view === 'results' && result && (

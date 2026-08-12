@@ -1,0 +1,43 @@
+<svg viewBox="205 45 270 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pottoka">
+  <!-- corps/tête (silhouette), recadrée depuis src/components/Pottoka.jsx -->
+  <path
+    d="M340 106 C 264 106, 220 166, 220 244 C 220 330, 246 402, 296 418 C 316 426, 364 426, 384 418 C 434 402, 460 330, 460 244 C 460 166, 416 106, 340 106 Z"
+    fill="#B06A34"
+  />
+  <!-- museau crème -->
+  <ellipse cx="340" cy="300" rx="78" ry="60" fill="#ECD4AE" />
+  <!-- joues -->
+  <ellipse cx="286" cy="310" rx="14" ry="9" fill="#E8927C" opacity="0.4" />
+  <ellipse cx="394" cy="310" rx="14" ry="9" fill="#E8927C" opacity="0.4" />
+
+  <!-- yeux -->
+  <ellipse cx="304" cy="212" rx="40" ry="46" fill="#ffffff" />
+  <ellipse cx="376" cy="212" rx="40" ry="46" fill="#ffffff" />
+  <ellipse cx="306" cy="214" rx="18" ry="26" fill="#2C2622" />
+  <ellipse cx="374" cy="214" rx="18" ry="26" fill="#2C2622" />
+  <circle cx="299" cy="203" r="5" fill="#ffffff" />
+  <circle cx="367" cy="203" r="5" fill="#ffffff" />
+
+  <!-- naseaux -->
+  <ellipse cx="318" cy="286" rx="6" ry="9" fill="#7A5C46" />
+  <ellipse cx="362" cy="286" rx="6" ry="9" fill="#7A5C46" />
+
+  <!-- bouche -->
+  <path d="M312 322 Q340 342 368 322" stroke="#7A5C46" strokeWidth="4" fill="none" strokeLinecap="round" />
+  <rect x="330" y="330" width="8" height="15" rx="3" fill="#ffffff" />
+  <rect x="342" y="330" width="8" height="15" rx="3" fill="#ffffff" />
+
+  <!-- txapela -->
+  <ellipse cx="338" cy="104" rx="74" ry="20" fill="#9E2028" transform="rotate(-8 338 104)" />
+  <ellipse cx="340" cy="92" rx="82" ry="30" fill="#C1272D" transform="rotate(-8 340 92)" />
+  <circle cx="349" cy="64" r="7" fill="#8E1B20" />
+
+  <!-- oreilles (devant la txapela inclinée) -->
+  <path d="M300 122 C 286 80, 296 62, 314 74 C 326 82, 328 110, 322 128 Z" fill="#B06A34" />
+  <path d="M306 118 C 300 90, 308 78, 317 86 C 324 92, 323 110, 319 122 Z" fill="#D89C92" />
+  <path d="M380 122 C 394 80, 384 62, 366 74 C 354 82, 352 110, 358 128 Z" fill="#B06A34" />
+  <path d="M374 118 C 380 90, 372 78, 363 86 C 356 92, 357 110, 361 122 Z" fill="#D89C92" />
+
+  <!-- toupet -->
+  <path d="M326 128 C 330 144, 350 144, 354 128 C 360 142, 348 156, 340 156 C 332 156, 320 142, 326 128 Z" fill="#3A281A" />
+</svg>

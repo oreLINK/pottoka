@@ -1,0 +1,15 @@
+{
+  "items": [
+    { "fr": "zéro", "eu": "zero", "value": 0 },
+    { "fr": "un", "eu": "bat", "value": 1 },
+    { "fr": "deux", "eu": "bi", "value": 2 },
+    { "fr": "trois", "eu": "hiru", "value": 3 },
+    { "fr": "quatre", "eu": "lau", "value": 4 },
+    { "fr": "cinq", "eu": "bost", "value": 5 },
+    { "fr": "six", "eu": "sei", "value": 6 },
+    { "fr": "sept", "eu": "zazpi", "value": 7 },
+    { "fr": "huit", "eu": "zortzi", "value": 8 },
+    { "fr": "neuf", "eu": "bederatzi", "value": 9 },
+    { "fr": "dix", "eu": "hamar", "value": 10 }
+  ]
+}

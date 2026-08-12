@@ -1,0 +1,15 @@
+{
+  "title": "0 à 10",
+  "description": "Apprends à compter de 0 à 10 en euskara.",
+  "count": 10,
+  "calls": [
+    { "kind": "vocab", "groups": ["numbers-0-10"], "exerciseTypes": ["new_word_card", "mcq_word", "free_translation"] },
+    { "kind": "vocab", "groups": ["numbers-0-10"], "exerciseTypes": ["match_pairs"], "pairCount": 5 },
+    { "kind": "literal", "type": "word_bank", "payload": { "promptLang": "fr", "answerLang": "eu", "prompt": "un et deux", "answer": ["bat", "eta", "bi"], "distractors": ["hiru", "lau"] } },
+    { "kind": "literal", "type": "word_bank", "payload": { "promptLang": "fr", "answerLang": "eu", "prompt": "trois et quatre", "answer": ["hiru", "eta", "lau"], "distractors": ["bost", "bi", "zero"] } },
+    { "kind": "literal", "type": "word_bank", "payload": { "promptLang": "eu", "answerLang": "fr", "prompt": "sei eta zazpi", "answer": ["six", "et", "sept"], "distractors": ["cinq", "huit"] } },
+    { "kind": "literal", "type": "fill_blank", "payload": { "prompt": "Complète la suite", "text": "hiru, ___, bost", "accepted": ["lau"] } },
+    { "kind": "literal", "type": "fill_blank", "payload": { "prompt": "Complète la suite", "text": "zazpi, ___, bederatzi", "accepted": ["zortzi"] } },
+    { "kind": "literal", "type": "fill_blank", "payload": { "prompt": "Complète la suite", "text": "hamar, ___, hamabi", "accepted": ["hamaika"] } }
+  ]
+}
