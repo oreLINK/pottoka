@@ -1,0 +1,39 @@
+{
+  "chapters": [
+    {
+      "id": "ch1",
+      "title": "Chapitre 1 : Les bases",
+      "titleEu": "1. kapitulua : Oinarrizkoak",
+      "color": "#3AA655",
+      "isDisplay": true,
+      "units": [
+        {
+          "id": "ch1-u1",
+          "title": "Unité 1 : Les chiffres et les nombres",
+          "titleEu": "1. Unitatea: Irudiak eta zenbakiak",
+          "color": "#3AA655",
+          "isDisplay": true,
+          "lessons": ["ch1-u1-l1", "ch1-u1-c1", "ch1-u1-l2", "ch1-u1-l3", "ch1-u1-l4", "ch1-u1-l5"]
+        }
+      ]
+    },
+    {
+      "id": "ch2",
+      "title": "Se présenter",
+      "titleEu": "Aurkezpena",
+      "color": "#1CA0C4",
+      "locked": true,
+      "isDisplay": false,
+      "units": [
+        {
+          "id": "ch2-u1",
+          "title": "Salutations",
+          "titleEu": "Agurrak",
+          "color": "#1CA0C4",
+          "isDisplay": true,
+          "lessons": ["ch2-u1-l1"]
+        }
+      ]
+    }
+  ]
+}

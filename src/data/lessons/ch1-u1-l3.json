@@ -1,0 +1,8 @@
+{
+  "title": "50 à 100",
+  "description": "Continue jusqu’à 100.",
+  "count": 10,
+  "calls": [
+    { "kind": "generated_number_range", "min": 50, "max": 100 }
+  ]
+}
