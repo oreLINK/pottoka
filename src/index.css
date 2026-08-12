@@ -356,7 +356,7 @@ html, body {
 }
 .match-item--sel { border-color: var(--blue); background: var(--blue-tint); }
 .match-item--wrong { border-color: var(--red); background: var(--red-tint); animation: shake 0.4s; }
-.match-item--done { visibility: hidden; }
+.match-item--done { border-color: var(--green); background: var(--green-tint); color: var(--green-d); cursor: default; }
 @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
 
 /* Pied : Vérifier / feedback */
