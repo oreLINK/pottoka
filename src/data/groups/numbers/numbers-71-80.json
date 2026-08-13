@@ -1,0 +1,14 @@
+{
+  "items": [
+    { "fr": "soixante et onze", "eu": "hirurogeita hamaika", "value": 71 },
+    { "fr": "soixante-douze", "eu": "hirurogeita hamabi", "value": 72 },
+    { "fr": "soixante-treize", "eu": "hirurogeita hamahiru", "value": 73 },
+    { "fr": "soixante-quatorze", "eu": "hirurogeita hamalau", "value": 74 },
+    { "fr": "soixante-quinze", "eu": "hirurogeita hamabost", "value": 75 },
+    { "fr": "soixante-seize", "eu": "hirurogeita hamasei", "value": 76 },
+    { "fr": "soixante-dix-sept", "eu": "hirurogeita hamazazpi", "value": 77 },
+    { "fr": "soixante-dix-huit", "eu": "hirurogeita hemezortzi", "value": 78 },
+    { "fr": "soixante-dix-neuf", "eu": "hirurogeita hemeretzi", "value": 79 },
+    { "fr": "quatre-vingts", "eu": "laurogei", "value": 80 }
+  ]
+}

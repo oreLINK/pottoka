@@ -1,0 +1,14 @@
+{
+  "items": [
+    { "fr": "cinquante et un", "eu": "berrogeita hamaika", "value": 51 },
+    { "fr": "cinquante-deux", "eu": "berrogeita hamabi", "value": 52 },
+    { "fr": "cinquante-trois", "eu": "berrogeita hamahiru", "value": 53 },
+    { "fr": "cinquante-quatre", "eu": "berrogeita hamalau", "value": 54 },
+    { "fr": "cinquante-cinq", "eu": "berrogeita hamabost", "value": 55 },
+    { "fr": "cinquante-six", "eu": "berrogeita hamasei", "value": 56 },
+    { "fr": "cinquante-sept", "eu": "berrogeita hamazazpi", "value": 57 },
+    { "fr": "cinquante-huit", "eu": "berrogeita hemezortzi", "value": 58 },
+    { "fr": "cinquante-neuf", "eu": "berrogeita hemeretzi", "value": 59 },
+    { "fr": "soixante", "eu": "hirurogei", "value": 60 }
+  ]
+}

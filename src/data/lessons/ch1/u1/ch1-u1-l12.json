@@ -1,0 +1,9 @@
+{
+  "title": "0 à 100 sans les dizaines · Maîtrise",
+  "description": "Termine de maîtriser les nombres de 0 à 100.",
+  "count": 10,
+  "calls": [
+    { "type": "match_pairs", "groups": ["numbers-0-100"] },
+    { "type": "free_translation", "groups": ["numbers-0-100"] }
+  ]
+}

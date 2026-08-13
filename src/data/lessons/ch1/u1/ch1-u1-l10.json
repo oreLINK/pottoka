@@ -1,0 +1,9 @@
+{
+  "title": "0 à 100 sans les dizaines · Découverte",
+  "description": "Découvre les nombres de 0 à 100.",
+  "count": 10,
+  "calls": [
+    { "type": "new_word_card", "groups": ["numbers-0-100"] },
+    { "type": "mcq_word", "groups": ["numbers-0-100"] }
+  ]
+}
