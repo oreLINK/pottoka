@@ -1,7 +1,7 @@
 import { byId } from './registry'
 
-const metaModules = import.meta.glob('./courses/*.json', { eager: true, import: 'default' })
-const mdModules = import.meta.glob('./courses/*.md', { eager: true, query: '?raw', import: 'default' })
+const metaModules = import.meta.glob('./courses/**/*.json', { eager: true, import: 'default' })
+const mdModules = import.meta.glob('./courses/**/*.md', { eager: true, query: '?raw', import: 'default' })
 
 const metaById = byId(metaModules)
 const mdById = byId(mdModules)

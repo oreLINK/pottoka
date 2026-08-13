@@ -1,0 +1,14 @@
+{
+  "items": [
+    { "fr": "quarante et un", "eu": "berrogeita bat", "value": 41 },
+    { "fr": "quarante-deux", "eu": "berrogeita bi", "value": 42 },
+    { "fr": "quarante-trois", "eu": "berrogeita hiru", "value": 43 },
+    { "fr": "quarante-quatre", "eu": "berrogeita lau", "value": 44 },
+    { "fr": "quarante-cinq", "eu": "berrogeita bost", "value": 45 },
+    { "fr": "quarante-six", "eu": "berrogeita sei", "value": 46 },
+    { "fr": "quarante-sept", "eu": "berrogeita zazpi", "value": 47 },
+    { "fr": "quarante-huit", "eu": "berrogeita zortzi", "value": 48 },
+    { "fr": "quarante-neuf", "eu": "berrogeita bederatzi", "value": 49 },
+    { "fr": "cinquante", "eu": "berrogeita hamar", "value": 50 }
+  ]
+}

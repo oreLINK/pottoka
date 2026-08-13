@@ -5,10 +5,11 @@
 // fois. Les règles de composition ci-dessous (contraction -ta, liaison "eta",
 // préfixes des centaines, ordre "milioi bat") sont une PROPOSITION À FAIRE
 // VALIDER PAR UN BASCOPHONE, au même titre que le reste du contenu.
-import numbers0to10 from '../data/groups/numbers-0-10.json'
-import numbers11to19 from '../data/groups/numbers-11-19.json'
+import numbers0to10 from '../data/groups/numbers/numbers-0-10.json'
+import numbers11to20 from '../data/groups/numbers/numbers-11-20.json'
 
-const UNITS = [...numbers0to10.items, ...numbers11to19.items]
+const UNITS = [...numbers0to10.items, ...numbers11to20.items]
+  .filter((w) => w.value < 20)
   .sort((a, b) => a.value - b.value)
   .map((w) => w.eu)
 

@@ -1,0 +1,14 @@
+{
+  "items": [
+    { "fr": "trente et un", "eu": "hogeita hamaika", "value": 31 },
+    { "fr": "trente-deux", "eu": "hogeita hamabi", "value": 32 },
+    { "fr": "trente-trois", "eu": "hogeita hamahiru", "value": 33 },
+    { "fr": "trente-quatre", "eu": "hogeita hamalau", "value": 34 },
+    { "fr": "trente-cinq", "eu": "hogeita hamabost", "value": 35 },
+    { "fr": "trente-six", "eu": "hogeita hamasei", "value": 36 },
+    { "fr": "trente-sept", "eu": "hogeita hamazazpi", "value": 37 },
+    { "fr": "trente-huit", "eu": "hogeita hemezortzi", "value": 38 },
+    { "fr": "trente-neuf", "eu": "hogeita hemeretzi", "value": 39 },
+    { "fr": "quarante", "eu": "berrogei", "value": 40 }
+  ]
+}

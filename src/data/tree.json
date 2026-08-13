@@ -13,7 +13,24 @@
           "titleEu": "1. Unitatea: Irudiak eta zenbakiak",
           "color": "#3AA655",
           "isDisplay": true,
-          "lessons": ["ch1-u1-l1", "ch1-u1-c1", "ch1-u1-l2", "ch1-u1-l3", "ch1-u1-l4", "ch1-u1-l5"]
+          "lessons": [
+            "ch1-u1-c1",
+            "ch1-u1-l1",
+            "ch1-u1-l2",
+            "ch1-u1-l3",
+            "ch1-u1-c2",
+            "ch1-u1-l4",
+            "ch1-u1-l5",
+            "ch1-u1-l6",
+            "ch1-u1-c3",
+            "ch1-u1-l7",
+            "ch1-u1-l8",
+            "ch1-u1-l9",
+            "ch1-u1-c4",
+            "ch1-u1-l10",
+            "ch1-u1-l11",
+            "ch1-u1-l12"
+          ]
         }
       ]
     },
@@ -31,7 +48,9 @@
           "titleEu": "Agurrak",
           "color": "#1CA0C4",
           "isDisplay": true,
-          "lessons": ["ch2-u1-l1"]
+          "lessons": [
+            "ch2-u1-l1"
+          ]
         }
       ]
     }

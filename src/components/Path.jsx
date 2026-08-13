@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import Pottoka from './Pottoka'
-import Coastline from './Coastline'
+import NavPicker from './NavPicker'
 import { resolvePathItem } from '../data/pathItems'
 
 function IconLock() {
@@ -23,23 +23,78 @@ function IconBook({ size = 24 }) {
 // sous chaque pastille. `tree` ne décrit que la navigation (voir
 // src/data/tree.json) ; le titre et la description de chaque élément
 // viennent de src/data/lessons/<id>.json ou src/data/courses/<id>.json.
+// Durée de l'animation de fermeture du popup (doit rester alignée avec la
+// keyframe popup-exit dans index.css).
+const POPUP_EXIT_MS = 160
+
 export default function Path({ tree, onStart }) {
   const [openId, setOpenId] = useState(null)
+  // Id du popup en train de jouer son animation de sortie : reste monté le
+  // temps de l'animation, un simple `isOpen && (...)` le démonterait sans transition.
+  const [closingId, setClosingId] = useState(null)
+
+  function closeWithAnimation(id) {
+    setClosingId(id)
+    setTimeout(() => setClosingId((cur) => (cur === id ? null : cur)), POPUP_EXIT_MS)
+  }
+
+  function toggleItem(id) {
+    setOpenId((current) => {
+      if (current === id) {
+        closeWithAnimation(id)
+        return null
+      }
+      if (current) closeWithAnimation(current)
+      return id
+    })
+  }
 
   // Ferme le popup au clic en dehors du nœud (ou de son popup) ouvert.
   useEffect(() => {
     if (!openId) return
     function handleClickOutside(e) {
       const wrap = e.target.closest('.node-wrap')
-      if (!wrap || wrap.dataset.itemId !== openId) setOpenId(null)
+      if (!wrap || wrap.dataset.itemId !== openId) {
+        closeWithAnimation(openId)
+        setOpenId(null)
+      }
     }
     document.addEventListener('mousedown', handleClickOutside)
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [openId])
 
+  // Popup plein écran "aller à…" (chapitres, ou unités d'un chapitre),
+  // ouverte au clic sur un bandeau chapitre/unité.
+  const [picker, setPicker] = useState(null) // { title, items } | null
+  const [pickerClosing, setPickerClosing] = useState(false)
+
+  function openChapterPicker() {
+    setPicker({
+      title: 'Chapitres',
+      items: tree.chapters.filter((c) => c.isDisplay).map((c) => (
+        { id: c.id, title: c.title, titleEu: c.titleEu, color: c.color, locked: !!c.locked }
+      )),
+    })
+  }
+  function openUnitPicker(ch) {
+    setPicker({
+      title: ch.title,
+      items: (ch.units || []).filter((u) => u.isDisplay).map((u) => (
+        { id: u.id, title: u.title, titleEu: u.titleEu, color: u.color || ch.color }
+      )),
+    })
+  }
+  function closePicker() {
+    setPickerClosing(true)
+    setTimeout(() => { setPicker(null); setPickerClosing(false) }, POPUP_EXIT_MS)
+  }
+  function goToPickerItem(id) {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    closePicker()
+  }
+
   return (
-    <div className="home">
-      <Coastline />
+    <div className="home" id="top">
       <header className="topbar">
         <div className="brand">
           <Pottoka expression="wave" size={20} />
@@ -48,21 +103,31 @@ export default function Path({ tree, onStart }) {
       </header>
 
       {tree.chapters.filter((ch) => ch.isDisplay).map((ch) => (
-        <section key={ch.id} className={'chapter' + (ch.locked ? ' chapter--locked' : '')}>
-          <div className="chapter-head" style={{ background: ch.color, boxShadow: `0 4px 0 ${shade(ch.color)}` }}>
+        <section key={ch.id} id={ch.id} className={'chapter' + (ch.locked ? ' chapter--locked' : '')}>
+          <button
+            type="button"
+            className="chapter-head"
+            style={{ background: ch.color, boxShadow: `0 4px 0 ${shade(ch.color)}` }}
+            onClick={openChapterPicker}
+          >
             <div className="chapter-title">{ch.title}</div>
             {ch.titleEu && <div className="chapter-subtitle" lang="eu">{ch.titleEu}</div>}
-          </div>
+          </button>
 
           {(ch.units || []).filter((unit) => unit.isDisplay).map((unit) => (
-            <div key={unit.id} className="unit">
-              <div className="unit-banner" style={{ background: tint(unit.color || ch.color) }}>
+            <div key={unit.id} id={unit.id} className="unit">
+              <button
+                type="button"
+                className="unit-banner"
+                style={{ background: tint(unit.color || ch.color) }}
+                onClick={() => openUnitPicker(ch)}
+              >
                 <div className="unit-banner-text">
                   <div className="unit-title">{unit.title}</div>
                   {unit.titleEu && <div className="unit-sub" lang="eu">{unit.titleEu}</div>}
                 </div>
                 <IconBook />
-              </div>
+              </button>
 
               <div className="path">
                 {(unit.lessons || []).map((rawId, idx) => {
@@ -75,6 +140,7 @@ export default function Path({ tree, onStart }) {
                     ? { background: ch.color, boxShadow: `0 4px 0 ${shade(ch.color)}` }
                     : undefined
                   const isOpen = openId === rawId
+                  const isClosing = closingId === rawId
                   return (
                     <div
                       key={rawId}
@@ -87,14 +153,14 @@ export default function Path({ tree, onStart }) {
                         className={'node' + (locked ? ' node--locked' : '') + (isCourse ? ' node--course' : '')}
                         style={nodeStyle}
                         disabled={locked}
-                        onClick={() => setOpenId((id) => (id === rawId ? null : rawId))}
+                        onClick={() => toggleItem(rawId)}
                         aria-label={locked ? `${item.data.title} — verrouillé` : item.data.title}
                       >
                         {locked ? <IconLock /> : isCourse ? <IconBook size={30} /> : <IconStar />}
                       </button>
 
-                      {isOpen && (
-                        <div className="node-popup">
+                      {(isOpen || isClosing) && (
+                        <div className={'node-popup' + (isOpen ? '' : ' node-popup--closing')}>
                           <div className="node-popup-title">{item.data.title}</div>
                           {item.data.description && <div className="node-popup-desc">{item.data.description}</div>}
                           <button
@@ -103,7 +169,7 @@ export default function Path({ tree, onStart }) {
                             style={isCourse
                               ? { background: 'var(--red)', boxShadow: '0 4px 0 var(--red-d)' }
                               : { background: ch.color, boxShadow: `0 4px 0 ${shade(ch.color)}` }}
-                            onClick={() => { setOpenId(null); onStart(rawId) }}
+                            onClick={() => { closeWithAnimation(rawId); setOpenId(null); onStart(rawId) }}
                           >
                             Commencer
                           </button>
@@ -119,6 +185,16 @@ export default function Path({ tree, onStart }) {
       ))}
 
       <div className="path-end muted">À venir…</div>
+
+      {picker && (
+        <NavPicker
+          title={picker.title}
+          items={picker.items}
+          closing={pickerClosing}
+          onSelect={goToPickerItem}
+          onClose={closePicker}
+        />
+      )}
     </div>
   )
 }
