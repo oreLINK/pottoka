@@ -1,0 +1,14 @@
+{
+  "items": [
+    { "fr": "dix", "eu": "hamar", "value": 10 },
+    { "fr": "vingt", "eu": "hogei", "value": 20 },
+    { "fr": "trente", "eu": "hogeita hamar", "value": 30 },
+    { "fr": "quarante", "eu": "berrogei", "value": 40 },
+    { "fr": "cinquante", "eu": "berrogeita hamar", "value": 50 },
+    { "fr": "soixante", "eu": "hirurogei", "value": 60 },
+    { "fr": "soixante-dix", "eu": "hirurogeita hamar", "value": 70 },
+    { "fr": "quatre-vingts", "eu": "laurogei", "value": 80 },
+    { "fr": "quatre-vingt-dix", "eu": "laurogeita hamar", "value": 90 },
+    { "fr": "cent", "eu": "ehun", "value": 100 }
+  ]
+}

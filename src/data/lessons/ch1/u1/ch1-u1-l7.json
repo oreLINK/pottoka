@@ -1,0 +1,9 @@
+{
+  "title": "Les dizaines · Découverte",
+  "description": "Découvre les dizaines de 10 à 100 en euskara.",
+  "count": 10,
+  "calls": [
+    { "type": "new_word_card", "groups": ["numbers-tens-10-100"] },
+    { "type": "mcq_word", "groups": ["numbers-tens-10-100"] }
+  ]
+}

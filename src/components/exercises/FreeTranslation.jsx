@@ -13,7 +13,7 @@ export default function FreeTranslation({ ex, value, onChange, locked }) {
         autoCapitalize="off"
         autoCorrect="off"
         spellCheck={false}
-        placeholder="Ta réponse en basque…"
+        placeholder={answerLang === 'fr' ? 'Ta réponse en français…' : 'Ta réponse en basque…'}
         value={value || ''}
         disabled={locked}
         onChange={(e) => onChange(e.target.value)}

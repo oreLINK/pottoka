@@ -1,8 +1,0 @@
-{
-  "title": "100 à 1000",
-  "description": "Compte par centaines.",
-  "count": 10,
-  "calls": [
-    { "kind": "generated_number_range", "min": 100, "max": 1000 }
-  ]
-}

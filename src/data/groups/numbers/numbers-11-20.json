@@ -8,6 +8,7 @@
     { "fr": "seize", "eu": "hamasei", "value": 16 },
     { "fr": "dix-sept", "eu": "hamazazpi", "value": 17 },
     { "fr": "dix-huit", "eu": "hemezortzi", "value": 18 },
-    { "fr": "dix-neuf", "eu": "hemeretzi", "value": 19 }
+    { "fr": "dix-neuf", "eu": "hemeretzi", "value": 19 },
+    { "fr": "vingt", "eu": "hogei", "value": 20 }
   ]
 }

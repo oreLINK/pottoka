@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Path from './components/Path'
+import Sidebar from './components/Sidebar'
 import LessonPlayer from './components/LessonPlayer'
 import CoursePlayer from './components/CoursePlayer'
 import Results from './components/Results'
@@ -12,6 +13,20 @@ export default function App() {
   const [active, setActive] = useState(null) // { exercises }
   const [activeCourseId, setActiveCourseId] = useState(null)
   const [result, setResult] = useState(null)
+  // Id d'ancre à rejoindre une fois de retour sur l'accueil (clic sur la
+  // sidebar depuis une leçon/un cours : on quitte puis on scrolle).
+  const [scrollTarget, setScrollTarget] = useState(null)
+
+  useEffect(() => {
+    if (view !== 'home' || !scrollTarget) return
+    document.getElementById(scrollTarget)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    setScrollTarget(null)
+  }, [view, scrollTarget])
+
+  function goHome(anchorId) {
+    setView('home')
+    if (anchorId) setScrollTarget(anchorId)
+  }
 
   function startItem(id) {
     const item = resolvePathItem(id)
@@ -35,26 +50,30 @@ export default function App() {
   }
 
   return (
-    <div className="app">
-      {view === 'home' && (
-        <Path tree={tree} onStart={startItem} />
-      )}
+    <div className="shell">
+      <Sidebar tree={tree} onNavigate={goHome} />
 
-      {view === 'lesson' && active && (
-        <LessonPlayer
-          exercises={active.exercises}
-          onComplete={completeLesson}
-          onQuit={() => setView('home')}
-        />
-      )}
+      <div className="app">
+        {view === 'home' && (
+          <Path tree={tree} onStart={startItem} />
+        )}
 
-      {view === 'course' && activeCourseId && (
-        <CoursePlayer courseId={activeCourseId} onQuit={() => setView('home')} />
-      )}
+        {view === 'lesson' && active && (
+          <LessonPlayer
+            exercises={active.exercises}
+            onComplete={completeLesson}
+            onQuit={() => setView('home')}
+          />
+        )}
 
-      {view === 'results' && result && (
-        <Results result={result} onContinue={() => setView('home')} />
-      )}
+        {view === 'course' && activeCourseId && (
+          <CoursePlayer courseId={activeCourseId} onQuit={() => setView('home')} />
+        )}
+
+        {view === 'results' && result && (
+          <Results result={result} onContinue={() => setView('home')} />
+        )}
+      </div>
     </div>
   )
 }

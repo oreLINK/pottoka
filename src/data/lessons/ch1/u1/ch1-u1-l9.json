@@ -1,0 +1,9 @@
+{
+  "title": "Les dizaines · Maîtrise",
+  "description": "Termine de maîtriser les dizaines de 10 à 100.",
+  "count": 10,
+  "calls": [
+    { "type": "match_pairs", "groups": ["numbers-tens-10-100"] },
+    { "type": "free_translation", "groups": ["numbers-tens-10-100"] }
+  ]
+}

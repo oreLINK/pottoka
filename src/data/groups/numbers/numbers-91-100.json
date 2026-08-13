@@ -1,0 +1,14 @@
+{
+  "items": [
+    { "fr": "quatre-vingt-onze", "eu": "laurogeita hamaika", "value": 91 },
+    { "fr": "quatre-vingt-douze", "eu": "laurogeita hamabi", "value": 92 },
+    { "fr": "quatre-vingt-treize", "eu": "laurogeita hamahiru", "value": 93 },
+    { "fr": "quatre-vingt-quatorze", "eu": "laurogeita hamalau", "value": 94 },
+    { "fr": "quatre-vingt-quinze", "eu": "laurogeita hamabost", "value": 95 },
+    { "fr": "quatre-vingt-seize", "eu": "laurogeita hamasei", "value": 96 },
+    { "fr": "quatre-vingt-dix-sept", "eu": "laurogeita hamazazpi", "value": 97 },
+    { "fr": "quatre-vingt-dix-huit", "eu": "laurogeita hemezortzi", "value": 98 },
+    { "fr": "quatre-vingt-dix-neuf", "eu": "laurogeita hemeretzi", "value": 99 },
+    { "fr": "cent", "eu": "ehun", "value": 100 }
+  ]
+}

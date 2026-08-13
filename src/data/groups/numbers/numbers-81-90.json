@@ -1,0 +1,14 @@
+{
+  "items": [
+    { "fr": "quatre-vingt-un", "eu": "laurogeita bat", "value": 81 },
+    { "fr": "quatre-vingt-deux", "eu": "laurogeita bi", "value": 82 },
+    { "fr": "quatre-vingt-trois", "eu": "laurogeita hiru", "value": 83 },
+    { "fr": "quatre-vingt-quatre", "eu": "laurogeita lau", "value": 84 },
+    { "fr": "quatre-vingt-cinq", "eu": "laurogeita bost", "value": 85 },
+    { "fr": "quatre-vingt-six", "eu": "laurogeita sei", "value": 86 },
+    { "fr": "quatre-vingt-sept", "eu": "laurogeita zazpi", "value": 87 },
+    { "fr": "quatre-vingt-huit", "eu": "laurogeita zortzi", "value": 88 },
+    { "fr": "quatre-vingt-neuf", "eu": "laurogeita bederatzi", "value": 89 },
+    { "fr": "quatre-vingt-dix", "eu": "laurogeita hamar", "value": 90 }
+  ]
+}

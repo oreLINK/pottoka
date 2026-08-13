@@ -1,0 +1,9 @@
+{
+  "title": "11 à 20 · Entraînement",
+  "description": "Continue à t'entraîner sur les nombres de 11 à 20.",
+  "count": 10,
+  "calls": [
+    { "type": "mcq_word", "groups": ["numbers-11-20"] },
+    { "type": "match_pairs", "groups": ["numbers-11-20"] }
+  ]
+}

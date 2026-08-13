@@ -1,0 +1,14 @@
+{
+  "items": [
+    { "fr": "soixante et un", "eu": "hirurogeita bat", "value": 61 },
+    { "fr": "soixante-deux", "eu": "hirurogeita bi", "value": 62 },
+    { "fr": "soixante-trois", "eu": "hirurogeita hiru", "value": 63 },
+    { "fr": "soixante-quatre", "eu": "hirurogeita lau", "value": 64 },
+    { "fr": "soixante-cinq", "eu": "hirurogeita bost", "value": 65 },
+    { "fr": "soixante-six", "eu": "hirurogeita sei", "value": 66 },
+    { "fr": "soixante-sept", "eu": "hirurogeita zazpi", "value": 67 },
+    { "fr": "soixante-huit", "eu": "hirurogeita zortzi", "value": 68 },
+    { "fr": "soixante-neuf", "eu": "hirurogeita bederatzi", "value": 69 },
+    { "fr": "soixante-dix", "eu": "hirurogeita hamar", "value": 70 }
+  ]
+}

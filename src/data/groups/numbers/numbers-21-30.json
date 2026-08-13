@@ -1,0 +1,14 @@
+{
+  "items": [
+    { "fr": "vingt et un", "eu": "hogeita bat", "value": 21 },
+    { "fr": "vingt-deux", "eu": "hogeita bi", "value": 22 },
+    { "fr": "vingt-trois", "eu": "hogeita hiru", "value": 23 },
+    { "fr": "vingt-quatre", "eu": "hogeita lau", "value": 24 },
+    { "fr": "vingt-cinq", "eu": "hogeita bost", "value": 25 },
+    { "fr": "vingt-six", "eu": "hogeita sei", "value": 26 },
+    { "fr": "vingt-sept", "eu": "hogeita zazpi", "value": 27 },
+    { "fr": "vingt-huit", "eu": "hogeita zortzi", "value": 28 },
+    { "fr": "vingt-neuf", "eu": "hogeita bederatzi", "value": 29 },
+    { "fr": "trente", "eu": "hogeita hamar", "value": 30 }
+  ]
+}
