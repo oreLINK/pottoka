@@ -69,6 +69,7 @@ export default function Path({ tree, onStart }) {
   const [pickerClosing, setPickerClosing] = useState(false)
 
   function openChapterPicker() {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
     setPicker({
       title: 'Chapitres',
       items: tree.chapters.filter((c) => c.isDisplay).map((c) => (
@@ -77,6 +78,7 @@ export default function Path({ tree, onStart }) {
     })
   }
   function openUnitPicker(ch) {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
     setPicker({
       title: ch.title,
       items: (ch.units || []).filter((u) => u.isDisplay).map((u) => (

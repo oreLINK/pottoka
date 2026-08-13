@@ -32,6 +32,11 @@ export default function App() {
     const item = resolvePathItem(id)
     if (!item) return
 
+    // Le scroll de la page (accumulé en parcourant le chemin) ne se
+    // réinitialise pas tout seul quand on change d'écran : sans ça, le
+    // lecteur s'affiche à l'endroit où on avait scrollé dans le chemin.
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+
     if (item.kind === 'course') {
       setActiveCourseId(id)
       setView('course')
